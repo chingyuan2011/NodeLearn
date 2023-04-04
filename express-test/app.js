@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const user = require("./routes/user")
 
 app.get('/', (req, res) => {
     res.send(
@@ -13,21 +14,8 @@ app.get('/', (req, res) => {
     )
 })
 
-app.get('/user/:name/:date', (req, res) => {
-    const { name, date } = req.params
-    const { limit } = req.query
-    res.send(
-        `
-        <head>
-        </head>
-        <body>
-            <div>name: ${name}</div>
-            <div>date: ${date}</div>
-            <div>limit: ${limit}</div>
-        </body>
-        `
-    )
-})
+app.use('/user', user)
+
 
 const port = 3000
 app.listen(port)
